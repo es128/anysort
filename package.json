@@ -1,0 +1,40 @@
+{
+  "name": "anysort",
+  "version": "pre",
+  "description": "Sorting and matching utility using configurable string, glob, regular expression, and/or function matchers",
+  "author": {
+    "name": "Elan Shanker",
+    "url": "http://github.com/es128"
+  },
+  "homepage": "https://github.com/es128/anysort",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:es128/anysort.git"
+  },
+  "bugs": {
+    "url": "https://github.com/es128/anysort/issues"
+  },
+  "main": "lib",
+  "keywords": [
+    "sort",
+    "array",
+    "match",
+    "any",
+    "string",
+    "file",
+    "fs",
+    "list",
+    "glob",
+    "regex",
+    "regexp",
+    "regular",
+    "expression",
+    "function"
+  ],
+  "dependencies": {
+    "anymatch": "~0.1.0"
+  },
+  "scripts": {
+    "prepublish": "rm -rf lib && coffee --bare --output lib/ src/"
+  }
+}
