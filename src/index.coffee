@@ -24,7 +24,7 @@ anysort.matcher = anymatch.matcher
 anysort.splice = splice = (criteria, array) ->
 	matcher = anymatch.matcher criteria
 	matched = array.filter matcher
-	unmatched = array.filter (s) -> -1 is matches.indexOf s
+	unmatched = array.filter (s) -> -1 is matched.indexOf s
 	matched = matched.sort (a, b) -> anysort criteria, a, b
 	{matched, unmatched, sorted: matched.concat unmatched}
 
