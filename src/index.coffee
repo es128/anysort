@@ -15,6 +15,7 @@ anysort = (criteria, a, b) ->
 	else
 		0
 
+
 # expose anymatch methods
 anysort.match   = anymatch
 anysort.matcher = anymatch.matcher
@@ -33,16 +34,22 @@ anysort.splice = splice = (criteria, array) ->
 # Can be used with an anymatch-compatible criteria array,
 # or an array of those arrays.
 anysort.grouped = (groups, array) ->
-	active = before = []
+	sorted = []
+	before = null
 	after = []
 	remaining = array.slice()
 	groups.forEach (criteria) ->
-		return active = after if criteria is 'unmatched'
-		{matched, unmatched} = splice criteria, array
-		active = active.concat matched
+		if criteria is 'unmatched'
+			before = sorted.slice()
+			return sorted = []
+		{matched, unmatched} = splice criteria, remaining
+		sorted = sorted.concat matched
 		remaining = unmatched
+	if before
+		after = sorted
+	else
+		before = sorted
 	# natural (alphabetical) sort of remaining
-	sorted = remaining.sort (a, b) -> a < b
-	before.concat sorted, after
+	before.concat remaining.sort(), after
 
 module.exports = anysort
