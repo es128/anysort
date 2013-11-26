@@ -1,5 +1,6 @@
 anymatch = require 'anymatch'
 
+# A/B comparison for use in an Array.sort callback
 anysort = (criteria, a, b) ->
 	matcher = anymatch.matcher criteria
 	indexOfA = matcher a, true
@@ -14,9 +15,12 @@ anysort = (criteria, a, b) ->
 	else
 		0
 
+# expose anymatch methods
 anysort.match   = anymatch
 anysort.matcher = anymatch.matcher
 
+# given the sorting criteria and full array, returns the fully
+# sorted array as well as separate matched and unmatched lists
 anysort.splice = (criteria, array) ->
 	matcher = anymatch.matcher criteria
 	matched = array.filter matcher
