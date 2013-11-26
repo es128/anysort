@@ -10,11 +10,15 @@ anysort = (criteria, a, b) ->
 		-1
 	else if not hasA and hasB
 		1
-	else if hasA and hasB
+	else if indexOfA isnt indexOfB
 		indexOfA - indexOfB
+	# when all else is equal, natural sort
+	else if a < b
+		-1
+	else if a > b
+		1
 	else
 		0
-
 
 # expose anymatch methods
 anysort.match   = anymatch
