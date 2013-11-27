@@ -1,6 +1,6 @@
 {
   "name": "anysort",
-  "version": "pre",
+  "version": "0.1.0",
   "description": "Sorting and matching utility using configurable string, glob, regular expression, and/or function matchers",
   "author": {
     "name": "Elan Shanker",
@@ -32,7 +32,7 @@
     "function"
   ],
   "dependencies": {
-    "anymatch": "~0.1.0"
+    "anymatch": "~0.1.1"
   },
   "scripts": {
     "prepublish": "rm -rf lib && coffee --bare --output lib/ src/"
