@@ -26,7 +26,7 @@ anysort.matcher = anymatch.matcher
 
 # given the sorting criteria and full array, returns the fully
 # sorted array as well as separate matched and unmatched lists
-anysort.splice = splice = (array, criteria) ->
+anysort.splice = splice = (array, criteria = -> false) ->
 	matcher = anymatch.matcher criteria
 	matched = array.filter matcher
 	unmatched = array.filter (s) -> -1 is matched.indexOf s
@@ -37,7 +37,7 @@ anysort.splice = splice = (array, criteria) ->
 # option to set the position of any unmatched items.
 # Can be used with an anymatch-compatible criteria array,
 # or an array of those arrays.
-anysort.grouped = (array, groups, order) ->
+anysort.grouped = (array, groups = [-> false], order) ->
 	sorted = []
 	ordered = []
 	remaining = array.slice()
