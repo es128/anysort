@@ -55,7 +55,7 @@ anysort.grouped = (array, groups = [-> false], order) ->
 
 	if '[object Array]' is toString.call order
 		order.forEach (position, index) ->
-			ordered[position] = sorted[index]
+			ordered[index] = sorted[position]
 	else
 		ordered = sorted
 
