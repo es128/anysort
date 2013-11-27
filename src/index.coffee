@@ -37,23 +37,30 @@ anysort.splice = splice = (criteria, array) ->
 # option to set the position of any unmatched items.
 # Can be used with an anymatch-compatible criteria array,
 # or an array of those arrays.
-anysort.grouped = (groups, array) ->
+anysort.grouped = (groups, array, order) ->
 	sorted = []
-	before = null
-	after = []
+	ordered = []
 	remaining = array.slice()
-	groups.forEach (criteria) ->
-		if criteria is 'unmatched'
-			before = sorted.slice()
-			return sorted = []
+	unmatchedPosition = groups.indexOf 'unmatched'
+
+	groups.forEach (criteria, index) ->
+		return if index is unmatchedPosition
 		{matched, unmatched} = splice criteria, remaining
-		sorted = sorted.concat matched
+		sorted[index] = matched
 		remaining = unmatched
-	if before
-		after = sorted
-	else
-		before = sorted
+
+	unmatchedPosition = sorted.length if unmatchedPosition is -1
 	# natural (alphabetical) sort of remaining
-	before.concat remaining.sort(), after
+	sorted[unmatchedPosition] = remaining.sort()
+
+	if '[object Array]' is toString.call order
+		order.forEach (position, index) ->
+			ordered[position] = sorted[index]
+	else
+		ordered = sorted
+
+	ordered.reduce (flat, group) ->
+		flat.concat group
+	, []
 
 module.exports = anysort
