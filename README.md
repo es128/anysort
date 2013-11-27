@@ -121,9 +121,9 @@ anysort.grouped(unsorted, [exclusions, matchers], [2, 1]);
 */
 ```
 
-#### [anysort.match](https://github.com/es128/anymatch#anymatch-matchers-teststring-returnindex)
-#### [anysort.matcher](https://github.com/es128/anymatch#anymatchmatcher-matchers)
-Exposed from anymatch
+#### Methods exposed from [anymatch](https://github.com/es128/anymatch#anymatch)
+[anysort.match](https://github.com/es128/anymatch#anymatch-matchers-teststring-returnindex)  
+[anysort.matcher](https://github.com/es128/anymatch#anymatchmatcher-matchers)
 
 License
 -------
