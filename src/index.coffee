@@ -1,24 +1,31 @@
 anymatch = require 'anymatch'
 
-# A/B comparison for use in an Array.sort callback
-anysort = (a, b, criteria = -> false) ->
+generateAnysort = (criteria = -> false) ->
 	matcher = anymatch.matcher criteria
-	indexOfA = matcher a, true
-	indexOfB = matcher b, true
-	[hasA, hasB] = [(indexOfA isnt -1), (indexOfB isnt -1)]
-	if hasA and not hasB
-		-1
-	else if not hasA and hasB
-		1
-	else if indexOfA isnt indexOfB
-		indexOfA - indexOfB
-	# when all else is equal, natural sort
-	else if a < b
-		-1
-	else if a > b
-		1
+	(a, b) ->
+		indexOfA = matcher a, true
+		indexOfB = matcher b, true
+		[hasA, hasB] = [(indexOfA isnt -1), (indexOfB isnt -1)]
+		if hasA and not hasB
+			-1
+		else if not hasA and hasB
+			1
+		else if indexOfA isnt indexOfB
+			indexOfA - indexOfB
+		# when all else is equal, natural sort
+		else if a < b
+			-1
+		else if a > b
+			1
+		else
+			0
+
+# A/B comparison for use in an Array.sort callback
+anysort = (a, b, criteria) ->
+	if typeof a is 'function'
+		generateAnysort a
 	else
-		0
+		generateAnysort(criteria) a, b
 
 # expose anymatch methods
 anysort.match   = anymatch
@@ -30,7 +37,7 @@ anysort.splice = splice = (array, criteria = -> false) ->
 	matcher = anymatch.matcher criteria
 	matched = array.filter matcher
 	unmatched = array.filter (s) -> -1 is matched.indexOf s
-	matched = matched.sort (a, b) -> anysort a, b, criteria
+	matched = matched.sort anysort criteria
 	{matched, unmatched, sorted: matched.concat unmatched}
 
 # Does a full sort based on an array of criteria, plus the
