@@ -8,10 +8,11 @@ Usage
 -----
 `npm install anysort --save`
 
-#### anysort (a, b, [matchers])
+#### anysort ([a, b,] [matchers])
 Intended for use in an [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
-callback. `a` and `b` are two values to be compared. `matchers` is an array of
-[anymatch](https://github.com/es128/anymatch)-compatible matchers. If `matchers`
+callback. `matchers` is an array of [anymatch](https://github.com/es128/anymatch)
+compatible matchers.`a` and `b` are two values to be compared. If called with
+only `matchers`, returns a function (the `Array.sort` callback). If `matchers`
 is omitted, the array will be sorted naturally (alphabetically). Natural sort
 will also be used in case of a tie (multiple members matching the same matcher).
 
@@ -37,7 +38,12 @@ var matchers = [
 	}
 ];
 
+// the following two are equivalent
+unsorted.sort(anysort(matchers));
+
 unsorted.sort(function (a, b){
+  // except there is an opportunity to run your own
+  // operations/mutations on a and b here if needed
 	return anysort(a, b, matchers);
 });
 /*

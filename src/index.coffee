@@ -23,9 +23,11 @@ generateAnysort = (criteria = -> false) ->
 # A/B comparison for use in an Array.sort callback
 anysort = ->
 	if arguments.length is 1
+		# returns the callback
 		generateAnysort arguments[0]
 	else
 		[a, b, criteria] = arguments
+		# returns the sorting int values
 		generateAnysort(criteria) a, b
 
 # expose anymatch methods

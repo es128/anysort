@@ -20,6 +20,9 @@ var matchers = [
 	}
 ];
 
+sorted = unsorted.sort(anysort(matchers));
+console.log(sorted);
+
 sorted = unsorted.sort(function (a, b){
 	return anysort(a, b, matchers);
 });
