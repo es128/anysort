@@ -21,10 +21,11 @@ generateAnysort = (criteria = -> false) ->
 			0
 
 # A/B comparison for use in an Array.sort callback
-anysort = (a, b, criteria) ->
-	if typeof a is 'function'
-		generateAnysort a
+anysort = ->
+	if arguments.length is 1
+		generateAnysort arguments[0]
 	else
+		[a, b, criteria] = arguments
 		generateAnysort(criteria) a, b
 
 # expose anymatch methods
