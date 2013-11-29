@@ -1,6 +1,6 @@
 {
   "name": "anysort",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sorting and matching utility using configurable string, glob, regular expression, and/or function matchers",
   "author": {
     "name": "Elan Shanker",
