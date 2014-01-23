@@ -2,12 +2,9 @@ anymatch = require 'anymatch'
 
 returnFalse = -> false
 
-generateAnysort = (criteria = returnFalse, tieBreakers) ->
+generateAnysort = (criteria = returnFalse) ->
 	priMatcher = anymatch.matcher criteria
-	if tieBreakers
-		altMatcher = anymatch.matcher tieBreakers
-	sorter = (a, b, useAlt) ->
-		matcher = if useAlt then altMatcher else priMatcher
+	sorter = (a, b, matcher = priMatcher) ->
 		indexOfA = matcher a, true
 		indexOfB = matcher b, true
 		[hasA, hasB] = [(indexOfA isnt -1), (indexOfB isnt -1)]
@@ -17,8 +14,9 @@ generateAnysort = (criteria = returnFalse, tieBreakers) ->
 			1
 		else if indexOfA isnt indexOfB
 			indexOfA - indexOfB
-		else if tieBreakers and not useAlt
-			sorter a, b, true
+		# try breaking ties using later criteria
+		else if hasA and hasB and indexOfA < criteria.length - 1
+			sorter a, b, anymatch.matcher criteria.slice indexOfA + 1
 		# when all else is equal, natural sort
 		else if a < b
 			-1
@@ -29,13 +27,13 @@ generateAnysort = (criteria = returnFalse, tieBreakers) ->
 
 # A/B comparison for use in an Array.sort callback
 anysort = ->
-	if arguments.length < 3
+	if arguments.length is 1
 		# returns the callback
-		generateAnysort arguments[0], arguments[1]
+		generateAnysort arguments[0]
 	else
-		[a, b, criteria, tieBreakers] = arguments
+		[a, b, criteria] = arguments
 		# returns the sorting int values
-		generateAnysort(criteria, tieBreakers) a, b
+		generateAnysort(criteria) a, b
 
 # expose anymatch methods
 anysort.match   = anymatch
@@ -47,7 +45,8 @@ anysort.splice = splice = (array, criteria = returnFalse, tieBreakers) ->
 	matcher = anymatch.matcher criteria
 	matched = array.filter matcher
 	unmatched = array.filter (s) -> -1 is matched.indexOf s
-	matched = matched.sort anysort criteria, tieBreakers
+	criteria = [criteria] unless Array.isArray criteria
+	matched = matched.sort anysort [].concat.apply criteria, tieBreakers
 	{matched, unmatched, sorted: matched.concat unmatched}
 
 # Does a full sort based on an array of criteria, plus the
@@ -67,8 +66,6 @@ anysort.grouped = (array, groups = [returnFalse], order) ->
 			tieBreakers = groups.slice index + 1
 			if index < unmatchedPosition
 				tieBreakers.splice unmatchedPosition - index - 1, 1
-			# shallow flatten
-			tieBreakers = [].concat.apply [], tieBreakers
 		{matched, unmatched} = splice remaining, criteria, tieBreakers
 		sorted[index] = matched
 		remaining = unmatched
