@@ -57,12 +57,15 @@ unsorted.sort(function (a, b){
 */
 ```
 
-#### anysort.splice (list, [matchers])
+#### anysort.splice (list, [matchers], [tieBreakers])
 Sorts the whole array. Returns an object with `sorted`, `matched`, and
 `unmatched` properties. `matched` is a sorted array of the `list` members that
 matched any of the `matchers`. `unmatched` is an array of the `list` members
 that didn't match any `matchers`, sorted naturally. `sorted` is a concatenation
-of `matched` and `unmatched`.
+of `matched` and `unmatched`. `tieBreakers` can optionally be specified as a 
+second set of matchers which will not cause inclusion in the `matched` set, but
+will be used for fallback sorting in case of ties caused by multiple `list`
+array members matching the same matcher. `tieBreakers` must be an array.
 
 ```js
 anysort.splice(unsorted, matchers);
