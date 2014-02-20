@@ -2,16 +2,11 @@ anymatch = require 'anymatch'
 
 returnFalse = -> false
 
-generateAnysort = (priCriteria = returnFalse) ->
-	priMatcher = anymatch.matcher priCriteria
-	sorter = (a, b, criteria) ->
-		if criteria
-			matcher = anymatch.matcher criteria
-		else
-			matcher = priMatcher
-			criteria = priCriteria
-		indexOfA = matcher a, true
-		indexOfB = matcher b, true
+generateAnysort = (criteria = returnFalse) ->
+	matcher = anymatch.matcher criteria
+	sorter = (a, b, startIndex) ->
+		indexOfA = matcher a, true, startIndex
+		indexOfB = matcher b, true, startIndex
 		[hasA, hasB] = [(indexOfA isnt -1), (indexOfB isnt -1)]
 		if hasA and not hasB
 			-1
@@ -21,7 +16,7 @@ generateAnysort = (priCriteria = returnFalse) ->
 			indexOfA - indexOfB
 		# try breaking ties using later criteria
 		else if hasA and hasB and indexOfA < criteria.length - 1
-			sorter a, b, criteria.slice indexOfA + 1
+			sorter a, b, indexOfA + 1
 		# when all else is equal, natural sort
 		else if a < b
 			-1
