@@ -74,7 +74,7 @@ anysort.grouped = (array, groups = [returnFalse], order) ->
 	# natural (lexical/alphabetical) sort of remaining
 	sorted[unmatchedPosition] = remaining.sort()
 
-	if '[object Array]' is toString.call order
+	if Array.isArray order
 		order.forEach (position, index) ->
 			ordered[index] = sorted[position]
 	else
