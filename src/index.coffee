@@ -75,7 +75,7 @@ anysort.grouped = (array, groups = [returnFalse], order) ->
 		remaining = unmatched
 
 	unmatchedPosition = sorted.length if unmatchedPosition is -1
-	# natural (lexical/alphabetical) sort of remaining
+	# native sort of remaining
 	sorted[unmatchedPosition] = remaining.sort()
 
 	if Array.isArray order
