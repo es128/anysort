@@ -20,10 +20,12 @@ var matchers = [
 	}
 ];
 
-sorted = unsorted.sort(anysort(matchers));
+
+// `.slice()` prevents `unsorted` from being mutated when using `.sort()`
+sorted = unsorted.slice().sort(anysort(matchers));
 console.log(sorted);
 
-sorted = unsorted.sort(function (a, b){
+sorted = unsorted.slice().sort(function (a, b){
 	return anysort(a, b, matchers);
 });
 console.log(sorted);
