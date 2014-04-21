@@ -53,7 +53,7 @@ describe 'anysort', ->
 		sortable.sort anysort matchers
 		assert sortable.indexOf(val1) < sortable.indexOf(val2)
 
-	describe 'anysort.splice', ->
+	describe '.splice', ->
 		it 'should return an appropriate object', ->
 			{matched, unmatched, sorted} = anysort.splice []
 			assert Array.isArray matched
