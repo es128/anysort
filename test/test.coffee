@@ -53,6 +53,10 @@ describe 'anysort', ->
 		sortable.sort anysort matchers
 		assert sortable.indexOf(val1) < sortable.indexOf(val2)
 
+	it 'should be usable within a custom Array.sort callback', ->
+		reverseSorted = sortable.slice().sort (a, b) -> anysort b, a, matchers
+		assert.deepEqual reverseSorted, sortable.sort(anysort matchers).reverse()
+
 	describe '.splice', ->
 		it 'should return an appropriate object', ->
 			{matched, unmatched, sorted} = anysort.splice []
