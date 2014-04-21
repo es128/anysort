@@ -44,7 +44,7 @@ anysort.matcher = anymatch.matcher
 anysort.splice = splice = (array, criteria = returnFalse, tieBreakers) ->
 	matcher = anymatch.matcher criteria
 	matched = array.filter matcher
-	unmatched = array.filter (s) -> -1 is matched.indexOf s
+	unmatched = array.filter((s) -> -1 is matched.indexOf s).sort()
 	criteria = [criteria] unless Array.isArray criteria
 	matched = matched.sort anysort [].concat.apply criteria, tieBreakers
 	{matched, unmatched, sorted: matched.concat unmatched}
