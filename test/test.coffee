@@ -55,7 +55,13 @@ describe 'anysort', ->
 
 	describe 'anysort.splice', ->
 		it 'should return an appropriate object', ->
-			{matched, unmatched, sorted} = anysort.splice sortable, matchers
+			{matched, unmatched, sorted} = anysort.splice []
 			assert Array.isArray matched
 			assert Array.isArray unmatched
 			assert Array.isArray sorted
+
+		it 'should work without matchers', ->
+			{matched, unmatched, sorted} = anysort.splice sortable
+			assert matched.length is 0
+			assert unmatched.length = sortable.length
+			assert.deepEqual sorted, sortable.sort()
