@@ -63,5 +63,5 @@ describe 'anysort', ->
 		it 'should work without matchers', ->
 			{matched, unmatched, sorted} = anysort.splice sortable
 			assert matched.length is 0
-			assert unmatched.length = sortable.length
+			assert unmatched.length is sortable.length
 			assert.deepEqual sorted, sortable.sort()
