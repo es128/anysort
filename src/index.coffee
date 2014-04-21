@@ -7,7 +7,8 @@ generateAnysort = (criteria = returnFalse) ->
 	sorter = (a, b, startIndex) ->
 		indexOfA = matcher a, true, startIndex
 		indexOfB = matcher b, true, startIndex
-		[hasA, hasB] = [(indexOfA isnt -1), (indexOfB isnt -1)]
+		hasA = indexOfA isnt -1
+		hasB = indexOfB isnt -1
 		if hasA and not hasB
 			-1
 		else if not hasA and hasB
@@ -17,7 +18,7 @@ generateAnysort = (criteria = returnFalse) ->
 		# try breaking ties using later criteria
 		else if hasA and hasB and indexOfA < criteria.length - 1
 			sorter a, b, indexOfA + 1
-		# when all else is equal, natural sort
+		# when all else is equal, natural sort (replicates native Array.sort())
 		else if a < b
 			-1
 		else if a > b
