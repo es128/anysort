@@ -40,3 +40,12 @@ describe 'anysort', ->
 	it 'should sort with a single matcher', ->
 		assert.notEqual sortable[0], matchers[0]
 		assert.equal sortable.sort(anysort matchers[0])[0], matchers[0]
+
+	it 'should break ties with lower matchers', ->
+		val1 = 'path/anyjs/foo.js'
+		val2 = 'path/anyjs/aaz.js'
+		assert sortable.indexOf(val1) > sortable.indexOf(val2)
+		sortable.sort anysort matchers[1] # only the matcher they both hit
+		assert sortable.indexOf(val1) > sortable.indexOf(val2)
+		sortable.sort anysort matchers
+		assert sortable.indexOf(val1) < sortable.indexOf(val2)
