@@ -65,3 +65,9 @@ describe 'anysort', ->
 			assert matched.length is 0
 			assert unmatched.length is sortable.length
 			assert.deepEqual sorted, sortable.sort()
+
+		it 'should properly utilize matchers', ->
+			{matched, unmatched, sorted} = anysort.splice sortable, matchers
+			assert unmatched.length is 1
+			assert.deepEqual sorted, matched.concat unmatched
+			assert.deepEqual sorted, sortable.sort anysort matchers
