@@ -52,3 +52,10 @@ describe 'anysort', ->
 		# commenting out the /foo.js$/ matcher should cause this test to fail
 		sortable.sort anysort matchers
 		assert sortable.indexOf(val1) < sortable.indexOf(val2)
+
+	describe 'anysort.splice', ->
+		it 'should return an appropriate object', ->
+			{matched, unmatched, sorted} = anysort.splice sortable, matchers
+			assert Array.isArray matched
+			assert Array.isArray unmatched
+			assert Array.isArray sorted
