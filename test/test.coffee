@@ -140,3 +140,8 @@ describe 'anysort', ->
 			sortedWithUnmatched = anysort.grouped sortable, [before, 'unmatched', after]
 			sortedWithOrder     = anysort.grouped sortable, [before, after], [0, 2, 1]
 			assert.deepEqual sortedWithUnmatched, sortedWithOrder
+
+		it 'should support exclusions', ->
+			exclusions = /ba/
+			sorted = anysort.grouped sortable, [exclusions, before, after], [1, 3, 2]
+			assert sorted.length < sortable.length
