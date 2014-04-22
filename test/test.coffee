@@ -88,6 +88,20 @@ describe 'anysort', ->
 			assert -1 isnt unmatched.indexOf sortable[3]
 
 	describe '.grouped', ->
+		before = /to/
+		after = ['path/anyjs/baz.js', 'path/anyjs/aaz.js']
+
 		it 'should require only the first argument (list)', ->
 			assert.throws anysort.grouped
 			assert.doesNotThrow -> anysort.grouped []
+
+		it 'should return natively sorted list without matchers', ->
+			assert anysort.grouped(sortable), sortable.sort()
+
+		it 'should require groupedMatchers to be an array', ->
+			assert.throws -> anysort.grouped sortable, before
+
+		it 'should sort with groupedMatchers', ->
+			sorted = anysort.grouped sortable, [before]
+			{matched} = anysort.splice sortable, before
+			assert.deepEqual matched, sorted[0...matched.length]
