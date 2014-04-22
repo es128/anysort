@@ -76,8 +76,7 @@ anysort.grouped = (array, groups = [returnFalse], order) ->
 		remaining = unmatched
 
 	unmatchedPosition = sorted.length if unmatchedPosition is -1
-	# native sort of remaining
-	sorted[unmatchedPosition] = remaining.sort()
+	sorted[unmatchedPosition] = remaining # already native sorted within splice
 
 	if Array.isArray order
 		order.forEach (position, index) ->
