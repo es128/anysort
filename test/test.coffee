@@ -89,7 +89,7 @@ describe 'anysort', ->
 
 	describe '.grouped', ->
 		before = /to/
-		after = ['path/anyjs/baz.js', 'path/anyjs/aaz.js']
+		after = ['path/zjs/baz.js', 'path/zjs/aaz.js']
 
 		it 'should require only the first argument (list)', ->
 			assert.throws anysort.grouped
@@ -100,6 +100,11 @@ describe 'anysort', ->
 
 		it 'should require groupedMatchers to be an array', ->
 			assert.throws -> anysort.grouped sortable, before
+
+		it 'should not mutate input list', ->
+			sorted = anysort.grouped sortable, [before]
+			assert.notDeepEqual sorted, sortable
+			assert.equal sorted.length, sortable.length
 
 		it 'should sort with groupedMatchers', ->
 			sorted = anysort.grouped sortable, [before]
@@ -113,3 +118,20 @@ describe 'anysort', ->
 			start = matchedBefore.length
 			end = start + matchedAfter.length
 			assert.deepEqual matchedAfter, sorted[start...end]
+
+		it 'should set unmatched position', ->
+			sorted = anysort.grouped sortable, [before, 'unmatched', after]
+			matchedBefore = (anysort.splice sortable, before).matched
+			matchedAfter  = (anysort.splice sortable, after ).matched
+
+			# matchedBefore at the front
+			assert.deepEqual matchedBefore, sorted[0...matchedBefore.length]
+
+			# matchedAfter at the end
+			assert.deepEqual matchedAfter, sorted[sorted.length-matchedAfter.length..]
+
+			# unmatched in the middle
+			unmatched = sortable.sort().filter (item) ->
+				item not in matchedBefore.concat matchedAfter
+			assert.deepEqual unmatched,
+				sorted[matchedBefore.length...sorted.length-matchedAfter.length]
