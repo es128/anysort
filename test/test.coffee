@@ -86,3 +86,8 @@ describe 'anysort', ->
 			# sortable[3] matches the tieBreakers, but isn't in the matched array
 			assert anysort.match matchers, sortable[3]
 			assert -1 isnt unmatched.indexOf sortable[3]
+
+	describe '.grouped', ->
+		it 'should require only the first argument (list)', ->
+			assert.throws anysort.grouped
+			assert.doesNotThrow -> anysort.grouped []
