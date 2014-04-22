@@ -135,3 +135,8 @@ describe 'anysort', ->
 				item not in matchedBefore.concat matchedAfter
 			assert.deepEqual unmatched,
 				sorted[matchedBefore.length...sorted.length-matchedAfter.length]
+
+		it 'should respect separate order definition', ->
+			sortedWithUnmatched = anysort.grouped sortable, [before, 'unmatched', after]
+			sortedWithOrder     = anysort.grouped sortable, [before, after], [0, 2, 1]
+			assert.deepEqual sortedWithUnmatched, sortedWithOrder
