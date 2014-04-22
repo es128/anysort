@@ -15,8 +15,8 @@ describe 'anysort', ->
 			'path/zjs/baz.js'
 			'path/zjs/aaz.js'
 			'path/to/file.js'
-			'path/zjs/caz.js'
 			'path/zjs/foo.js'
+			'path/zjs/caz.js'
 		]
 
 		nativeSorted = sortable.slice().sort()
@@ -79,10 +79,10 @@ describe 'anysort', ->
 		it 'should utilize tieBreakers', ->
 			# without tieBreakers, sortable[0] comes first
 			{matched, unmatched, sorted} = anysort.splice sortable, matchers[3]
-			assert.deepEqual matched, [sortable[0], sortable[7]]
-			# with tieBreakers, sortable[7] wins
+			assert.deepEqual matched, [sortable[0], sortable[6]]
+			# with tieBreakers, sortable[6] wins
 			{matched, unmatched, sorted} = anysort.splice sortable, matchers[3], matchers
-			assert.deepEqual matched, [sortable[7], sortable[0]]
+			assert.deepEqual matched, [sortable[6], sortable[0]]
 			# sortable[3] matches the tieBreakers, but isn't in the matched array
 			assert anysort.match matchers, sortable[3]
 			assert -1 isnt unmatched.indexOf sortable[3]
