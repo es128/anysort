@@ -105,3 +105,11 @@ describe 'anysort', ->
 			sorted = anysort.grouped sortable, [before]
 			{matched} = anysort.splice sortable, before
 			assert.deepEqual matched, sorted[0...matched.length]
+
+		it 'should allow nested arrays and non-arrays in groupedMatchers', ->
+			sorted = anysort.grouped sortable, [before, after]
+			matchedBefore = (anysort.splice sortable, before).matched
+			matchedAfter  = (anysort.splice sortable, after ).matched
+			start = matchedBefore.length
+			end = start + matchedAfter.length
+			assert.deepEqual matchedAfter, sorted[start...end]
