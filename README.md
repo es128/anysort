@@ -1,4 +1,4 @@
-anysort
+anysort [![Build Status](https://travis-ci.org/es128/anysort.svg)](https://travis-ci.org/es128/anysort)
 =======
 Javascript module to sort arrays of strings using flexible arrays of matchers.
 Regular expressions, globs, plain strings, or functions may be used as matchers
