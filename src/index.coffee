@@ -42,13 +42,14 @@ anysort.matcher = anymatch.matcher
 
 # given the sorting criteria and full array, returns the fully
 # sorted array as well as separate matched and unmatched lists
-anysort.splice = splice = (array, criteria = returnFalse, tieBreakers) ->
+anysort.splice = splice = (array, criteria = returnFalse, tieBreakers, suppressUnmatchedSorting) ->
 	matcher = anymatch.matcher criteria
 	matched = array.filter matcher
 	unmatched =
 		array
 		.filter (s) -> -1 is matched.indexOf s
-		.sort()
+	unmatched = unmatched.sort() unless suppressUnmatchedSorting
+	
 	criteria = [criteria] unless Array.isArray criteria
 	# use [].concat.apply because criteria may or may not be an array
 	matched = matched.sort anysort [].concat.apply criteria, tieBreakers
@@ -58,7 +59,7 @@ anysort.splice = splice = (array, criteria = returnFalse, tieBreakers) ->
 # option to set the position of any unmatched items.
 # Can be used with an anymatch-compatible criteria array,
 # or an array of those arrays.
-anysort.grouped = (array, groups = [returnFalse], order) ->
+anysort.grouped = (array, groups = [returnFalse], order, suppressUnmatchedSorting = false) ->
 	sorted = []
 	ordered = []
 	remaining = array.slice()
@@ -71,7 +72,7 @@ anysort.grouped = (array, groups = [returnFalse], order) ->
 			tieBreakers = groups.slice index + 1
 			if index < unmatchedPosition
 				tieBreakers.splice unmatchedPosition - index - 1, 1
-		{matched, unmatched} = splice remaining, criteria, tieBreakers
+		{matched, unmatched} = splice remaining, criteria, tieBreakers, suppressUnmatchedSorting
 		sorted[index] = matched
 		remaining = unmatched
 

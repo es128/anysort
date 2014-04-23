@@ -145,3 +145,21 @@ describe 'anysort', ->
 			exclusions = /ba/
 			sorted = anysort.grouped sortable, [exclusions, before, after], [1, 3, 2]
 			assert sorted.length < sortable.length
+
+		it 'should have a stable sorting', ->
+			specialOrder = [
+				'before'
+				'after'
+				'a'
+				'X'
+				'b'
+			]
+
+			sorted = anysort.grouped specialOrder, [/before/, /after/, 'unmatched'], [0, 2, 1], true
+			assert.deepEqual sorted, [
+				'before'
+				'a'
+				'X'
+				'b'
+				'after'
+			]
