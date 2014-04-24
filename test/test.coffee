@@ -145,3 +145,10 @@ describe 'anysort', ->
 			exclusions = /ba/
 			sorted = anysort.grouped sortable, [exclusions, before, after], [1, 3, 2]
 			assert sorted.length < sortable.length
+
+		it 'should break ties with lower matcher sets', ->
+			tyingMatcher = /path.*a/
+			moreMatchers1 = 'nonarraywontmatchanything'
+			moreMatchers2 = ['blah', /foo/ ,'**/caz.*']
+			sorted = anysort.grouped sortable, [tyingMatcher, moreMatchers1, moreMatchers2]
+			assert.equal sorted[0], 'path/zjs/caz.js'
