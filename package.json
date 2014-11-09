@@ -14,7 +14,6 @@
   "bugs": {
     "url": "https://github.com/es128/anysort/issues"
   },
-  "main": "lib",
   "keywords": [
     "sort",
     "array",
