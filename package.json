@@ -39,7 +39,7 @@
   "license": "ISC",
   "devDependencies": {
     "coveralls": "~2.11.2",
-    "mocha": "~1.17.1",
-    "istanbul": "~0.2.4"
+    "mocha": "~2.0.1",
+    "istanbul": "~0.3.2"
   }
 }
