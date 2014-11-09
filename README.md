@@ -4,9 +4,12 @@ Javascript module to sort arrays of strings using flexible arrays of matchers.
 Regular expressions, globs, plain strings, or functions may be used as matchers
 ([see anymatch](https://github.com/es128/anymatch)).
 
+
 Usage
 -----
-`npm install anysort --save`
+```sh
+npm install anysort --save
+```
 
 #### anysort ([a, b,] [matchers])
 Intended for use in an [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
@@ -130,9 +133,6 @@ anysort.grouped(unsorted, [exclusions, matchers], [2, 1]);
 */
 ```
 
-#### Methods exposed from [anymatch](https://github.com/es128/anymatch#anymatch)
-[anysort.match](https://github.com/es128/anymatch#anymatch-matchers-teststring-returnindex)  
-[anysort.matcher](https://github.com/es128/anymatch#anymatchmatcher-matchers)
 
 License
 -------
