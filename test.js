@@ -1,6 +1,7 @@
 'use strict';
 
 var anysort = require('./');
+var anymatch = require('anymatch');
 var assert = require('assert');
 
 var sortable, nativeSorted, matchers;
@@ -89,7 +90,7 @@ describe('anysort', function() {
       assert.deepEqual(tieBroken.matched, [sortable[6], sortable[0]]);
 
       // sortable[3] matches the tieBreakers, but isn't in the matched array
-      assert(anysort.match(matchers, sortable[3]));
+      assert(anymatch(matchers, sortable[3]));
       assert(tieBroken.unmatched.indexOf(sortable[3]) !== -1);
     });
   });
