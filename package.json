@@ -34,7 +34,7 @@
     "anymatch": "~0.2.0"
   },
   "scripts": {
-    "test": "istanbul test _mocha -- test.js"
+    "test": "istanbul test _mocha"
   },
   "license": "MIT",
   "devDependencies": {
