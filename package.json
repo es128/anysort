@@ -34,7 +34,7 @@
     "anymatch": "~0.2.0"
   },
   "scripts": {
-    "test": "istanbul test _mocha -- test/test.* --compilers coffee:coffee-script/register"
+    "test": "istanbul test _mocha -- test.js"
   },
   "license": "MIT",
   "devDependencies": {
