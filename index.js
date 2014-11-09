@@ -1,3 +1,5 @@
+'use strict';
+
 var anymatch = require('anymatch');
 
 function returnFalse() { return false; }
