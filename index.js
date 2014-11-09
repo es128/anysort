@@ -6,7 +6,7 @@ function returnFalse() { return false; }
 
 function generateAnysort(criteria) {
   if (!criteria) { criteria = returnFalse; }
-  var matcher = anymatch.matcher(criteria);
+  var matcher = anymatch(criteria);
   return function sorter(a, b, startIndex) {
     var hasA, hasB, indexOfA, indexOfB;
     indexOfA = matcher(a, true, startIndex);
@@ -46,7 +46,7 @@ function anysort() {
 // sorted array as well as separate matched and unmatched lists
 function splice(array, criteria, tieBreakers) {
   if (!criteria) { criteria = returnFalse; }
-  var matcher = anymatch.matcher(criteria);
+  var matcher = anymatch(criteria);
   var matched = array.filter(matcher);
   var unmatched = array.filter(function(s) {
     return matched.indexOf(s) === -1;
