@@ -47,18 +47,18 @@ var matchers = [
 unsorted.sort(anysort(matchers));
 
 unsorted.sort(function (a, b){
-  // except there is an opportunity to run your own
-  // operations/mutations on a and b here if needed
+	// except there is an opportunity to run your own
+	// operations/mutations on a and b here if needed
 	return anysort(a, b, matchers);
 });
 /*
 [ 'path/to/file.js',
-  'path/anyjs/aaz.js',
-  'path/anyjs/baz.js',
-  'path/anyjs/caz.js',
-  'path/to/foo.js',
-  'path/to/bar.js',
-  'bar.js' ]
+	'path/anyjs/aaz.js',
+	'path/anyjs/baz.js',
+	'path/anyjs/caz.js',
+	'path/to/foo.js',
+	'path/to/bar.js',
+	'bar.js' ]
 */
 ```
 
@@ -76,21 +76,21 @@ array members matching the same matcher. `tieBreakers` must be an array.
 anysort.splice(unsorted, matchers);
 /*
 { matched:
-   [ 'path/to/file.js',
-     'path/anyjs/aaz.js',
-     'path/anyjs/baz.js',
-     'path/anyjs/caz.js',
-     'path/to/foo.js',
-     'path/to/bar.js' ],
-  unmatched: [ 'bar.js' ],
-  sorted:
-   [ 'path/to/file.js',
-     'path/anyjs/aaz.js',
-     'path/anyjs/baz.js',
-     'path/anyjs/caz.js',
-     'path/to/foo.js',
-     'path/to/bar.js',
-     'bar.js' ] }
+	 [ 'path/to/file.js',
+		 'path/anyjs/aaz.js',
+		 'path/anyjs/baz.js',
+		 'path/anyjs/caz.js',
+		 'path/to/foo.js',
+		 'path/to/bar.js' ],
+	unmatched: [ 'bar.js' ],
+	sorted:
+	 [ 'path/to/file.js',
+		 'path/anyjs/aaz.js',
+		 'path/anyjs/baz.js',
+		 'path/anyjs/caz.js',
+		 'path/to/foo.js',
+		 'path/to/bar.js',
+		 'bar.js' ] }
 */
 
 // quick access to just the sorted array
@@ -116,12 +116,12 @@ var after = ['path/anyjs/baz.js', 'path/anyjs/aaz.js'];
 anysort.grouped(unsorted, [before, 'unmatched', after]);
 /*
 [ 'path/to/bar.js',
-  'path/to/file.js',
-  'path/to/foo.js',
-  'bar.js',
-  'path/anyjs/caz.js',
-  'path/anyjs/baz.js',
-  'path/anyjs/aaz.js' ]
+	'path/to/file.js',
+	'path/to/foo.js',
+	'bar.js',
+	'path/anyjs/caz.js',
+	'path/anyjs/baz.js',
+	'path/anyjs/aaz.js' ]
 */
 
 var exclusions = /anyjs/;
@@ -129,9 +129,9 @@ var exclusions = /anyjs/;
 anysort.grouped(unsorted, [exclusions, matchers], [2, 1]);
 /*
 [ 'bar.js',
-  'path/to/file.js',
-  'path/to/foo.js',
-  'path/to/bar.js' ]
+	'path/to/file.js',
+	'path/to/foo.js',
+	'path/to/bar.js' ]
 */
 ```
 
