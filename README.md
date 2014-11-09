@@ -138,4 +138,4 @@ anysort.grouped(unsorted, [exclusions, matchers], [2, 1]);
 
 License
 -------
-[MIT](https://raw.github.com/es128/anysort/master/LICENSE)
+[ISC](https://raw.github.com/es128/anysort/master/LICENSE)
