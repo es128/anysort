@@ -1,4 +1,4 @@
-var anysort = require('..');
+var anysort = require('./');
 
 var sorted;
 var unsorted = [
