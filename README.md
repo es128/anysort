@@ -135,6 +135,9 @@ anysort.grouped(unsorted, [exclusions, matchers], [2, 1]);
 */
 ```
 
+Change Log
+----------
+[See release notes page on GitHub](https://github.com/es128/anymatch/releases)
 
 License
 -------
