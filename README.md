@@ -4,6 +4,8 @@ Javascript module to sort arrays of strings using flexible arrays of matchers.
 Regular expressions, globs, plain strings, or functions may be used as matchers
 ([see anymatch](https://github.com/es128/anymatch)).
 
+[![NPM](https://nodei.co/npm/anysort.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/anysort/)
+[![NPM](https://nodei.co/npm-dl/anysort.png?height=3&months=9)](https://nodei.co/npm-dl/anysort/)
 
 Usage
 -----
