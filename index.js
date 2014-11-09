@@ -42,10 +42,6 @@ function anysort() {
   }
 }
 
-// expose anymatch methods
-anysort.match = anymatch;
-anysort.matcher = anymatch.matcher;
-
 // given the sorting criteria and full array, returns the fully
 // sorted array as well as separate matched and unmatched lists
 function splice(array, criteria, tieBreakers) {
