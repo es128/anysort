@@ -17,8 +17,10 @@ function generateAnysort(criteria) {
       return 1;
     } else if (indexOfA !== indexOfB) {
       return indexOfA - indexOfB;
+    // try breaking ties using later criteria
     } else if (hasA && hasB && indexOfA < criteria.length - 1) {
       return sorter(a, b, indexOfA + 1);
+    // when all else is equal, natural sort (replicates native Array.sort())
     } else if (a < b) {
       return -1;
     } else if (a > b) {
@@ -29,6 +31,7 @@ function generateAnysort(criteria) {
   };
 }
 
+// A/B comparison for use in an Array.sort callback
 function anysort() {
   if (arguments.length === 1) {
     return generateAnysort(arguments[0]);
@@ -37,10 +40,12 @@ function anysort() {
   }
 }
 
+// expose anymatch methods
 anysort.match = anymatch;
-
 anysort.matcher = anymatch.matcher;
 
+// given the sorting criteria and full array, returns the fully
+// sorted array as well as separate matched and unmatched lists
 function splice(array, criteria, tieBreakers) {
   if (!criteria) { criteria = returnFalse; }
   var matcher = anymatch.matcher(criteria);
@@ -49,6 +54,7 @@ function splice(array, criteria, tieBreakers) {
     return matched.indexOf(s) === -1;
   }).sort();
   if (!Array.isArray(criteria)) { criteria = [criteria]; }
+  // use [].concat.apply because criteria may or may not be an array
   matched = matched.sort(anysort([].concat.apply(criteria, tieBreakers)));
   return {
     matched: matched,
@@ -58,6 +64,10 @@ function splice(array, criteria, tieBreakers) {
 }
 anysort.splice = splice;
 
+// Does a full sort based on an array of criteria, plus the
+// option to set the position of any unmatched items.
+// Can be used with an anymatch-compatible criteria array,
+// or an array of those arrays.
 function grouped(array, groups, order) {
   if (!groups) { groups = [returnFalse]; }
   var sorted = [];
