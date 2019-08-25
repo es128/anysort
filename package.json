@@ -1,13 +1,13 @@
 {
   "name": "anysort",
-  "version": "1.0.1",
+  "version": "2.0.0-pre",
   "description": "Sorting and matching utility using configurable string, glob, regular expression, and/or function matchers",
   "files": [
     "index.js"
   ],
   "author": {
     "name": "Elan Shanker",
-    "url": "http://github.com/es128"
+    "url": "https://github.com/es128"
   },
   "homepage": "https://github.com/es128/anysort",
   "repository": {
@@ -34,15 +34,15 @@
     "function"
   ],
   "dependencies": {
-    "anymatch": "~1.3.0"
+    "anymatch": "^3"
   },
   "scripts": {
-    "test": "istanbul cover _mocha && cat ./coverage/lcov.info | coveralls"
+    "test": "istanbul cover _mocha"
   },
   "license": "ISC",
   "devDependencies": {
-    "coveralls": "~2.11.2",
-    "mocha": "~2.0.1",
-    "istanbul": "~0.3.2"
+    "coveralls": "latest",
+    "mocha": "latest",
+    "istanbul": "latest"
   }
 }
