@@ -1,6 +1,6 @@
 {
   "name": "anysort",
-  "version": "2.0.0-pre",
+  "version": "2.0.0",
   "description": "Sorting and matching utility using configurable string, glob, regular expression, and/or function matchers",
   "files": [
     "index.js"
